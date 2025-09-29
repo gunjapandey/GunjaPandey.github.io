@@ -1,182 +1,688 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gunja Pandey | Portfolio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide-icons"></script>
-  <style>
-    :root {
-      --color-primary: #2563eb;
-      --color-text-dark: #111827;
-      --color-text-muted: #6b7280;
-      --color-background-light: #f9fafb;
-      --accent-education: #22c55e;
-      --accent-experience: #ef4444;
-      --accent-projects: #f59e0b;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gunja Pandey | Software Engineer Portfolio - Corporate Blue</title>
+<!-- Load Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Load Google Fonts: DM Serif Display (Headings) and Inter (Body) -->
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;0;1&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+<!-- Load Lucide Icons for aesthetic appeal -->
+<script src="https://unpkg.com/lucide@latest"></script>
 
-    /* Animations */
-    .animated-element {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.8s ease-out;
-    }
-    .animated-element.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .interactive-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .interactive-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 20px rgba(0,0,0,0.12);
-    }
-  </style>
+<!-- Configure Tailwind to use new unique fonts and dynamic colors -->
+<script>
+tailwind.config = {
+theme: {
+extend: {
+fontFamily: {
+heading: ['DM Serif Display', 'serif'],
+sans: ['Inter', 'sans-serif'],
+},
+colors: {
+'vibrant-accent': 'var(--color-primary)', 
+},
+}
+}
+}
+</script>
+<style>
+/* Enable smooth scrolling for an intuitive feel */
+html {
+scroll-behavior: smooth;
+}
+
+/* === Theme Variables (FORMAL DARK BLUE THEME) === */
+:root {
+/* General Theme Colors (Formal, Professional Blue) */
+--color-primary: #2563EB;      /* Main Accent: Blue 600 (Corporate Blue) */
+--color-background: #f9fafb;   /* Main BG: Very light gray/Off-White */
+--color-card: #ffffff;         /* Card BG: Pure White */
+--color-secondary: #e5e7eb;    /* Borders: Subtle Gray 200 */
+--color-text-dark: #1f2937;    /* Main Text: Dark Gray */
+--color-text-muted: #4b5563;    /* Secondary Text: Medium Gray */
+--shadow-rgb: 37, 99, 235;     /* RGB for primary color shadow (Blue 600) */
+
+/* Navigation/Button Colors */
+--nav-bg: #1D4ED8;             /* Blue 700 (Darker for solid buttons) */
+--nav-hover: #60A5FA;          /* Blue 400 (Lighter for hover) */
+
+/* Section Accent Colors (for thematic borders) - Kept bright for contrast */
+--accent-education: #34d399;  /* Emerald */
+--accent-experience: #fb923c; /* Orange */
+--accent-projects: #a78bfa;   /* Violet */
+--accent-tech: #f87171;       /* Red */
+--accent-leadership: #a3a3a3; /* Stone/Gray for Leadership */
+--accent-achievements: #fcd34d; /* Amber for Achievements */
+}
+
+/* Dark Mode Configuration (A soft, easy-on-the-eyes dark mode) */
+body.dark-mode {
+--color-primary: #60A5FA;      /* Blue 400 (Lighter accent) */
+--color-background: #1f2937;   /* Slate 800 */
+--color-card: #374151;         /* Slate 700 */
+--color-secondary: #4b5563;    /* Slate 600 */
+--color-text-dark: #f3f4f6;    /* Light Gray */
+--color-text-muted: #d1d5db;   /* Medium Light Gray */
+--shadow-rgb: 96, 165, 250;    /* RGB for primary color shadow (Blue 400) */
+
+--nav-bg: #2563EB;             /* Blue 600 */
+--nav-hover: #93C5FD;          /* Blue 300 */
+
+--accent-education: #6ee7b7;
+--accent-experience: #fdba74;
+--accent-projects: #c4b5fd;
+--accent-tech: #fca5a5;
+--accent-leadership: #d4d4d4;
+--accent-achievements: #fed7aa;
+}
+
+body {
+background-color: var(--color-background);
+color: var(--color-text-dark);
+font-family: 'Inter', sans-serif;
+transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Section Heading Style */
+.section-heading {
+font-family: 'DM Serif Display', serif;
+padding-left: 1.5rem;
+margin-bottom: 3rem;
+color: var(--color-text-dark);
+font-size: 3rem;
+font-weight: 400;
+/* Use a softer, rounded border for the Pinterest feel */
+border-left: 6px solid var(--section-accent); 
+border-radius: 3px 0 0 3px; 
+transition: border-color 0.4s ease;
+}
+
+/* === Scroll Progress Bar Styling === */
+#scroll-progress {
+position: fixed;
+top: 0;
+left: 0;
+height: 4px;
+background-color: var(--color-primary);
+width: 0%;
+z-index: 55;
+transition: background-color 0.4s ease;
+}
+
+/* === Card Hover Effect: Subtle Lift and Shadow (Softer Shadow) === */
+.interactive-card {
+position: relative;
+z-index: 10;
+transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+background-color: var(--color-card);
+border-color: var(--color-secondary);
+/* Increased border-radius for softer look */
+border-radius: 1.5rem; /* 24px */
+border: 1px solid var(--color-secondary);
+}
+.interactive-card:hover {
+transform: translateY(-6px) scale(1.005);
+/* Softer, more diffused shadow using the new blue primary */
+box-shadow: 0 10px 25px rgba(var(--shadow-rgb), 0.2), 0 3px 6px rgba(var(--shadow-rgb), 0.08);
+}
+
+/* Ensure the hero section card also uses the new rounded style */
+.hero-card {
+border-radius: 2.5rem; /* 40px */
+}
+
+/* === Functional Animation: Nav Links === */
+.nav-link {
+transition: background-color 0.3s, color 0.3s, transform 0.2s, box-shadow 0.3s;
+}
+.nav-link.active {
+background-color: var(--nav-bg);
+color: white;
+box-shadow: 0 2px 8px rgba(var(--shadow-rgb), 0.4);
+font-weight: 700;
+}
+.nav-link:hover {
+background-color: var(--nav-hover);
+color: white;
+}
+
+/* === Functional Animation: View Switch === */
+.content-view {
+opacity: 0;
+transform: translateY(20px);
+transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+width: 100%;
+}
+.content-view.active {
+opacity: 1;
+transform: translateY(0);
+}
+
+/* === Scroll Animation Classes === */
+.animated-element {
+opacity: 0;
+transition: opacity 1s ease-out, transform 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+transform: translateY(30px);
+}
+.animated-element.reveal {
+opacity: 1;
+transform: translateY(0);
+}
+
+</style>
 </head>
-<body class="bg-white text-[var(--color-text-dark)]">
-  <!-- Navbar -->
-  <nav class="flex justify-between items-center px-6 py-4 bg-white shadow-md sticky top-0 z-50">
-    <h1 class="text-2xl font-bold text-[var(--color-primary)]">Gunja Pandey</h1>
-    <div class="space-x-6">
-      <a href="#about" class="hover:text-[var(--color-primary)] transition">About</a>
-      <a href="#education" class="hover:text-[var(--color-primary)] transition">Education</a>
-      <a href="#experience" class="hover:text-[var(--color-primary)] transition">Experience</a>
-      <a href="#projects" class="hover:text-[var(--color-primary)] transition">Projects</a>
-      <a href="#contact" class="hover:text-[var(--color-primary)] transition">Contact Me</a>
-    </div>
-  </nav>
+<body class="antialiased">
 
-  <!-- Hero Section -->
-  <section class="flex flex-col items-center justify-center text-center py-20 bg-[var(--color-background-light)]">
-    <img 
-      id="headshot-img"
-      src="uploaded:796374E2-D192-431F-B1E1-9FC24A5DF9C2.jpg-4eb7754f-46bf-49a9-9e95-9c3a81809f0f" 
-      alt="Gunja Pandey Professional Headshot" 
-      class="w-48 h-48 md:w-60 md:h-60 object-cover rounded-full shadow-xl ring-4 ring-[var(--color-primary)]/50 animated-element"
-      style="transition-delay: 0.1s;"
-      onerror="this.onerror=null;this.src='https://placehold.co/240x240/2563EB/ffffff?text=GP';"
-    />
-    <h2 class="text-4xl font-bold mt-6 animated-element" style="transition-delay: 0.2s;">Software Engineer</h2>
-    <p class="text-lg italic text-[var(--color-text-muted)] mb-6 animated-element" style="transition-delay: 0.3s;">
-      "Learning is my superpower — I solve real-world problems with clarity and creativity."
-    </p>
-    <a href="https://www.linkedin.com/in/gunjapandey/" 
-       target="_blank" 
-       rel="noopener noreferrer" 
-       class="bg-[var(--color-primary)] hover:bg-blue-700 text-white px-6 py-3 rounded-full shadow-md transition transform hover:scale-105 animated-element"
-       style="transition-delay: 0.4s;">
-       Let’s Connect
-    </a>
-  </section>
+<!-- Scroll Progress Bar -->
+<div id="scroll-progress"></div>
 
-  <!-- About -->
-  <section id="about" class="max-w-4xl mx-auto py-16 px-6">
-    <h3 class="text-3xl font-bold mb-6 animated-element">About Me</h3>
-    <p class="text-[var(--color-text-muted)] leading-relaxed animated-element">
-      I am a results-driven Software Engineer with a strong background in backend development, cloud systems, and continuous learning. 
-      My journey blends hands-on industry experience with academic excellence, giving me the skills to deliver scalable, high-quality solutions.
-    </p>
-    <div class="flex space-x-4 mt-6">
-      <span class="px-4 py-2 bg-[var(--color-primary)]/10 text-[var(--color-primary)] rounded-lg">2+ Years Experience</span>
-      <span class="px-4 py-2 bg-[var(--color-primary)]/10 text-[var(--color-primary)] rounded-lg">8.73 CGPA</span>
-      <span class="px-4 py-2 bg-[var(--color-primary)]/10 text-[var(--color-primary)] rounded-lg">TOEFL 107</span>
-    </div>
-  </section>
+<!-- 1. Navigation Bar -->
+<header class="sticky top-0 z-50 bg-[var(--color-background)]/90 backdrop-blur-md shadow-md border-b border-[var(--color-secondary)]">
+<nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-16">
+<!-- Updated: Full Name at the Top -->
+<a href="#about" class="text-3xl font-heading font-extrabold text-[var(--color-primary)] hover:text-[var(--color-text-dark)] transition duration-200">
+GUNJA PANDEY
+</a>
+<div class="flex items-center space-x-2 sm:space-x-4">
+<!-- Dynamic Menu Links based on current view -->
+<div id="portfolio-nav" class="hidden sm:flex sm:space-x-2 font-semibold">
+<a href="#about" data-target="about" class="nav-link px-3 py-2 rounded-full text-[var(--color-text-dark)]">About</a>
+<a href="#experience" data-target="experience" class="nav-link px-3 py-2 rounded-full text-[var(--color-text-dark)]">Experience</a>
+<a href="#tech-stack" data-target="tech-stack" class="nav-link px-3 py-2 rounded-full text-[var(--color-text-dark)]">Tech Profile</a>
+<a href="#projects" data-target="projects" class="nav-link px-3 py-2 rounded-full text-[var(--color-text-dark)]">Projects</a>
+</div>
 
-  <!-- Education -->
-  <section id="education" class="py-16 bg-[var(--color-background-light)]">
-    <div class="max-w-4xl mx-auto px-6">
-      <h3 class="text-3xl font-bold mb-8 animated-element">Education</h3>
-      <div class="interactive-card bg-white p-6 shadow-md mb-6 border-l-4 border-[var(--accent-education)] animated-element">
-        <h4 class="text-xl font-bold">MSc Computer Science</h4>
-        <p class="text-[var(--color-text-muted)]">Trinity College Dublin | 2025 (Expected)</p>
-      </div>
-      <div class="interactive-card bg-white p-6 shadow-md border-l-4 border-[var(--accent-education)] animated-element">
-        <h4 class="text-xl font-bold">B.Tech in Computer Science</h4>
-        <p class="text-[var(--color-text-muted)]">VIT Chennai | 8.73 CGPA | 2024</p>
-      </div>
-    </div>
-  </section>
+<!-- New: Let's Connect (LinkedIn) Button -->
+<a href="https://linkedin/in/gunjapandey/" target="_blank" class="nav-link px-3 py-2 rounded-full font-medium text-[var(--color-primary)] border border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition duration-200 hidden sm:flex items-center">
+<i data-lucide="linkedin" class="w-4 h-4 mr-1"></i> Let's Connect
+</a>
 
-  <!-- Experience -->
-  <section id="experience" class="py-16">
-    <div class="max-w-4xl mx-auto px-6">
-      <h3 class="text-3xl font-bold mb-8 animated-element">Experience</h3>
-      <div class="interactive-card bg-white p-6 shadow-md border-l-4 border-[var(--accent-experience)] animated-element">
-        <h4 class="text-xl font-bold">Software Engineer</h4>
-        <p class="text-[var(--color-text-muted)]">Bajaj Finserv | 2024</p>
-        <p class="mt-2 text-[var(--color-text-muted)]">
-          Optimized backend processes, integrated APIs, and improved system efficiency. 
-          Worked on scalable solutions using Java, Spring Boot, and AWS.
-        </p>
-      </div>
-    </div>
-  </section>
+<!-- Contact View Switch -->
+<button onclick="toggleView('contact')" data-view="contact" id="contact-nav-btn" class="nav-link px-3 py-2 rounded-full font-medium text-white bg-[var(--color-primary)] hover:bg-[var(--nav-hover)] transition duration-200">Contact Me</button>
 
-  <!-- Achievements -->
-  <section id="achievements" class="py-16 bg-[var(--color-background-light)]">
-    <div class="max-w-4xl mx-auto px-6">
-      <h3 class="text-3xl font-bold mb-8 animated-element">Achievements</h3>
-      <ul class="list-disc list-inside space-y-2 text-[var(--color-text-muted)]">
-        <li>Published research paper at SCRS conference.</li>
-        <li>Reduced cloud costs by 33% with optimized deployments.</li>
-        <li>Improved code quality and reduced bugs by 90% using SonarQube.</li>
-      </ul>
-    </div>
-  </section>
+<!-- Theme Toggle Button -->
+<button id="theme-toggle" class="p-2 rounded-full text-[var(--color-text-dark)] hover:text-[var(--color-primary)] transition duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/50">
+<i data-lucide="sun" id="sun-icon" class="w-6 h-6"></i>
+<i data-lucide="moon" id="moon-icon" class="w-6 h-6 hidden"></i>
+</button>
+</div>
+</div>
+</nav>
+</header>
 
-  <!-- Projects -->
-  <section id="projects" class="py-16">
-    <div class="max-w-4xl mx-auto px-6">
-      <h3 class="text-3xl font-bold mb-8 animated-element">Projects</h3>
-      <div class="interactive-card bg-white p-6 shadow-md border-l-4 border-[var(--accent-projects)] animated-element">
-        <h4 class="text-xl font-bold">Cloud Cost Optimizer</h4>
-        <p class="text-[var(--color-text-muted)]">A project to optimize deployment costs and resource usage in AWS environments.</p>
-      </div>
-    </div>
-  </section>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow">
 
-  <!-- Continuous Learning -->
-  <section class="py-16 bg-[var(--color-background-light)]">
-    <div class="max-w-4xl mx-auto px-6">
-      <div class="interactive-card p-6 shadow-lg border-l-4 border-[var(--accent-education)] animated-element">
-        <h4 class="text-xl font-bold text-[var(--color-text-dark)] mb-3 flex items-center">
-          <i data-lucide="book-open" class="w-5 h-5 mr-2 text-[var(--accent-education)]"></i> Continuous Learning
-        </h4>
-        <p class="text-[var(--color-text-muted)] text-sm">
-          Currently diving into <strong>Cloud-Native Systems</strong>, <strong>Advanced Algorithms</strong>, and <strong>AI Applications</strong> as part of my Master’s journey. 
-          I believe in lifelong learning, combining theory with hands-on practice.
-        </p>
-      </div>
-    </div>
-  </section>
+<!-- === PORTFOLIO VIEW === -->
+<div id="portfolio-view" class="content-view active">
 
-  <!-- Contact -->
-  <section id="contact" class="py-20 bg-white">
-    <div class="max-w-4xl mx-auto text-center px-6">
-      <h3 class="text-3xl font-bold mb-8 animated-element">Contact Me</h3>
-      <p class="mb-4 text-[var(--color-text-muted)]">Email me at:</p>
-      <a href="mailto:thegunjapandey@gmail.com" class="text-[var(--color-primary)] text-lg hover:underline">
-        thegunjapandey@gmail.com
-      </a>
-    </div>
-  </section>
+<!-- 2. Hero Section / About -->
+<section id="about" class="py-16 md:py-24">
+<div class="animated-element p-1 w-full h-full">
+<div class="hero-card bg-[var(--color-card)] p-8 sm:p-12 shadow-2xl border border-[var(--color-secondary)] transition duration-300">
+<div class="flex flex-col md:flex-row items-center md:space-x-12">
+<!-- Headshot Image Container -->
+<div class="flex justify-center items-center">
+<img 
+id="headshot-img"
+    src="uploaded:796374E2-D192-431F-B1E1-9FC24A5DF9C2.jpg-4eb7754f-46bf-49a9-9e95-9c3a81809f0f" 
+    src="asset/796374E2-D192-431F-B1E1-9FC24A5DF9C2.JPG" 
+alt="Gunja Pandey Professional Headshot" 
+class="w-48 h-48 md:w-60 md:h-60 object-cover rounded-full shadow-xl ring-4 ring-[var(--color-primary)]/50 animated-element"
+style="transition-delay: 0.1s;"
+onerror="this.onerror=null;this.src='https://placehold.co/240x240/2563EB/ffffff?text=GP';"
+/>
+</div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      }, { threshold: 0.1 });
-      document.querySelectorAll(".animated-element").forEach(el => observer.observe(el));
-      lucide.createIcons();
-    });
-  </script>
+<div class="text-center md:text-left">
+<h1 class="text-5xl sm:text-7xl font-heading leading-tight text-[var(--color-text-dark)] mb-4 animated-element">
+<span class="text-[var(--color-primary)]">Gunja</span> Pandey
+</h1>
+<h2 class="text-2xl sm:text-3xl font-semibold text-[var(--color-text-dark)] mb-6 animated-element" style="transition-delay: 0.2s;">
+Software Engineer
+</h2>
+<!-- Emphasis bolds are now explicit <strong> tags -->
+<p class="text-lg text-[var(--color-text-muted)] max-w-3xl mb-8 animated-element" style="transition-delay: 0.3s;">
+A results-driven <strong>Software Engineer</strong> specializing in the design and optimization of <strong>high-throughput, enterprise-grade applications</strong> using <strong>Java</strong> and <strong>Spring Boot</strong>. With <strong>two years of hands-on experience</strong>, my focus has been on <strong>architecting scalable solutions</strong>, <strong>resolving critical production challenges</strong>, and elevating code quality standards, consistently driving significant improvements in system reliability and user experience. I am currently pursuing a <strong>Master's in Computer Science</strong> at University College Dublin.
+</p>
+
+<!-- Contact/Social Links -->
+<div class="flex justify-center md:justify-start space-x-6 animated-element" style="transition-delay: 0.4s;">
+<a href="mailto:gunja.pandey@ucdconnect.ie" class="animated-link flex items-center space-x-2 text-[var(--color-primary)] hover:text-[var(--nav-bg)] transition duration-200 font-bold hover:underline">
+<i data-lucide="mail" class="w-5 h-5"></i><span>Email</span>
+</a>
+<a href="https://linkedin/in/gunjapandey/" target="_blank" class="animated-link flex items-center space-x-2 text-[var(--color-primary)] hover:text-[var(--nav-bg)] transition duration-200 font-bold hover:underline">
+<i data-lucide="linkedin" class="w-5 h-5"></i><span>LinkedIn</span>
+</a>
+<a href="https://github.com/gunjapandey" target="_blank" class="animated-link flex items-center space-x-2 text-[var(--color-primary)] hover:text-[var(--nav-bg)] transition duration-200 font-bold hover:underline">
+<i data-lucide="github" class="w-5 h-5"></i><span>GitHub</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<hr class="border-[var(--color-secondary)] my-16" />
+
+<!-- 3. Work Experience Section -->
+<section id="experience" class="py-16">
+<h3 class="section-heading animated-element" style="--section-accent: var(--accent-experience);">Professional Experience</h3>
+<div class="space-y-10">
+
+<!-- Role 1: Software Engineer-II -->
+<div class="interactive-card p-8 shadow-lg border-t-6 border-[var(--accent-experience)] animated-element" style="--card-accent: var(--accent-experience);">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="text-xl font-bold text-[var(--color-text-dark)]">Software Engineer-II</h4>
+<p class="text-[var(--accent-experience)] font-medium">Bajaj Finserv Direct Limited</p>
+</div>
+<span class="text-sm text-[var(--color-text-muted)] bg-[var(--color-secondary)] px-3 py-1 rounded-full font-semibold">July 2023 - Aug 2025</span>
+</div>
+<p class="text-[var(--color-text-muted)] italic mb-4 text-sm">Tech: <strong>Java 11</strong>, <strong>Spring Boot 3.5</strong>, AWS, JIRA, Jenkins</p>
+<ul class="list-disc list-outside space-y-3 pl-5 text-[var(--color-text-dark)] text-sm">
+<li>Resolved <strong>50+ production issues</strong> and integrated secure RESTful APIs, significantly improving system reliability and customer experience.</li>
+<li>Optimized the Motor Insurance journey by integrating <strong>Signzy APIs</strong>, resulting in a <strong>33% reduction in costs</strong> and enhanced overall efficiency.</li>
+<li>Collaborated on high-level design, performed in-depth code reviews, and documented the insurance journey with <strong>Structizr DSL</strong>, ensuring high scalability and maintainability.</li>
+</ul>
+</div>
+
+<!-- Role 2: Software Engineering Intern (Bajaj) -->
+<div class="interactive-card p-8 shadow-lg border-t-6 border-[var(--accent-experience)] animated-element" style="--card-accent: var(--accent-experience);">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="text-xl font-bold text-[var(--color-text-dark)]">Software Engineering Intern</h4>
+<p class="text-[var(--accent-experience)] font-medium">Bajaj Finserv Direct Limited</p>
+</div>
+<span class="text-sm text-[var(--color-text-muted)] bg-[var(--color-secondary)] px-3 py-1 rounded-full font-semibold">Jan 2023 - Jun 2023</span>
+</div>
+<ul class="list-disc list-outside space-y-3 pl-5 text-[var(--color-text-dark)] text-sm">
+<li>Enhanced the Pocket insurance journey by implementing <strong>5 new features</strong> and resolving <strong>20+ bugs</strong>, leading to a <strong>15% increase in user task completion rate</strong> and a <strong>25% reduction in defect rate</strong>.</li>
+<li>Improved code quality using <strong>SonarQube</strong> to cut bugs by <strong>90%</strong> and code smells by <strong>80%</strong>.</li>
+<li>Consistently completed <strong>100%</strong> of assigned user stories within sprint deadlines, improving delivery efficiency.</li>
+</ul>
+</div>
+</div>
+</section>
+
+<hr class="border-[var(--color-secondary)] my-16" />
+
+<!-- 4. Technical Profile / Tech Stack Section (IMPROVED ICONS) -->
+<section id="tech-stack" class="py-16">
+<h3 class="section-heading animated-element" style="--section-accent: var(--accent-tech);">Technical Profile</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+<!-- Languages (Code) -->
+<div class="interactive-card p-6 shadow-lg border-l-6 border-[var(--accent-tech)] animated-element">
+<h4 class="text-xl font-bold text-[var(--color-text-dark)] mb-3 flex items-center"><i data-lucide="code" class="w-5 h-5 mr-2 text-[var(--accent-tech)]"></i> Programming Languages</h4>
+<div class="flex flex-wrap gap-x-4 gap-y-3 text-[var(--color-text-dark)]">
+<!-- Java Icon (Coffee Cup) -->
+<span class="flex items-center space-x-1 font-semibold text-red-600">
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M10 2a8 8 0 0 0-8 8c0 4.4 3.6 8 8 8h10c2.2 0 4-1.8 4-4v-2c0-2.2-1.8-4-4-4h-2"/><path d="M17 10h.01"/><path d="M7 6c.5-1 1-1.5 1.5-2"/></svg>
+<span class="text-[var(--color-text-dark)]">Java</span>
+</span>
+<!-- C++ Icon (C's and Plus) -->
+<span class="flex items-center space-x-1 font-semibold text-blue-600">
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M10 10h4m-2-2v4"/><path d="M15 15h4m-2-2v4"/></svg>
+<span class="text-[var(--color-text-dark)]">C++</span>
+</span>
+<!-- Python Icon (Snake) -->
+<span class="flex items-center space-x-1 font-semibold text-yellow-600">
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M10.75 3c-.7-.3-1.5-.5-2.25 
+                               .5-1.5 1-2 1.5-2"/></svg>
+<span class="text-[var(--color-text-dark)]">Python</span>
+</span>
+<!-- SQL Icon (Database) -->
+<span class="flex items-center space-x-1 font-semibold text-gray-700">
+<i data-lucide="database" class="w-5 h-5"></i>
+<span class="text-[var(--color-text-dark)]">SQL</span>
+</span>
+</div>
+</div>
+
+<!-- Frameworks & Back-End -->
+<div class="interactive-card p-6 shadow-lg border-l-6 border-[var(--accent-tech)] animated-element" style="transition-delay: 0.1s;">
+<h4 class="text-xl font-bold text-[var(--color-text-dark)] mb-3 flex items-center"><i data-lucide="server" class="w-5 h-5 mr-2 text-[var(--accent-tech)]"></i> Frameworks & APIs</h4>
+<div class="flex flex-wrap gap-x-4 gap-y-3 text-[var(--color-text-dark)]">
+<span class="flex items-center space-x-1 font-semibold"><i data-lucide="leaf" class="w-5 h-5 text-green-600"></i><span>Spring Boot</span></span>
+<span class="flex items-center space-x-1 font-semibold"><i data-lucide="zap" class="w-5 h-5 text-yellow-600"></i><span>JUnit</span></span>
+<span class="flex items-center space-x-1 font-semibold"><i data-lucide="shield-check" class="w-5 h-5 text-purple-600"></i><span>Mockito</span></span>
+<span class="flex items-center space-x-1 font-semibold"><i data-lucide="route" class="w-5 h-5 text-blue-600"></i><span>REST APIs</span></span>
+</div>
+</div>
+
+<!-- Cloud & DevOps -->
+<div class="interactive-card p-6 shadow-lg border-l-6 border-[var(--accent-tech)] animated-element" style="transition-delay: 0.2s;">
+<h4 class="text-xl font-bold text-[var(--color-text-dark)] mb-3 flex items-center"><i data-lucide="cloud" class="w-5 h-5 mr-2 text-[var(--accent-tech)]"></i> Cloud & DevOps</h4>
+<div class="flex flex-wrap gap-x-4 gap-y-3 text-[var(--color-text-dark)]">
+<span class="flex items-center space-x-1 font-semibold"><i data-lucide="box" class="w-5 h-5 text-blue-500"></i><span>Docker</span></span>
+<span class="flex items-center space-x-1 font-semibold"><i data-lucide="cube" class="w-5 h-5 text-indigo-500"></i><span>Kubernetes</span></span>
+<span class="flex items-center space-x-1 font-semibold"><i data-lucide="air-vane" class="w-5 h-5 text-yellow-500"></i><span>AWS</span></span>
+<span class="flex items-center space-x-1 font-semibold"><i data-lucide="github" class="w-5 h-5 text-gray-700"></i><span>Git</span></span>
+<span class="flex items-center space-x-1 font-semibold"><i data-lucide="anchor" class="w-5 h-5 text-orange-500"></i><span>Jenkins</span></span>
+</div>
+</div>
+</div>
+</section>
+
+<hr class="border-[var(--color-secondary)] my-16" />
+
+<!-- 5. Education Section -->
+<section id="education" class="py-16">
+<h3 class="section-heading animated-element" style="--section-accent: var(--accent-education);">Education</h3>
+<div class="space-y-8">
+<!-- UCD Master's -->
+<div class="interactive-card p-8 shadow-lg border-t-6 border-[var(--accent-education)] animated-element">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="text-xl font-bold text-[var(--color-text-dark)]">Master's in Computer Science</h4>
+<p class="text-[var(--accent-education)] font-medium">University College Dublin (UCD)</p>
+</div>
+<span class="text-sm text-[var(--color-text-muted)] bg-[var(--color-secondary)] px-3 py-1 rounded-full font-semibold">Sep 2025 - Sep 2026</span>
+</div>
+<p class="text-[var(--color-text-muted)] mt-2">Specializing in advanced topics relevant to enterprise architecture and scalable systems.</p>
+<ul class="text-[var(--color-text-muted)] text-sm mt-3">
+<li><strong>Relevant Coursework:</strong> Advanced Software Engineering, Cloud Computing, Content Based Image and Video Retrieval.</li>
+</ul>
+</div>
+
+<!-- VIT Bachelor's -->
+<div class="interactive-card p-8 shadow-lg border-t-6 border-[var(--accent-education)] animated-element" style="transition-delay: 0.1s;">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="text-xl font-bold text-[var(--color-text-dark)]">Bachelor of Computer Science and Engineering</h4>
+<p class="text-[var(--accent-education)] font-medium">Vellore Institute of Technology Chennai</p>
+</div>
+<span class="text-sm text-[var(--color-text-muted)] bg-[var(--color-secondary)] px-3 py-1 rounded-full font-semibold">July 2019 - April 2023</span>
+</div>
+<p class="text-[var(--color-text-muted)] mt-2">GPA: <strong>3.67/4.2</strong></p>
+</div>
+</div>
+</section>
+
+<hr class="border-[var(--color-secondary)] my-16" />
+
+<!-- 6. Projects Section -->
+<section id="projects" class="py-16">
+<h3 class="section-heading animated-element" style="--section-accent: var(--accent-projects);">Key Projects</h3>
+<div class="space-y-8">
+<!-- Project 1: Vehicle Detection, Classification and Counting -->
+<div class="interactive-card p-8 shadow-lg border-t-6 border-[var(--accent-projects)] animated-element">
+<h4 class="text-xl font-bold text-[var(--color-text-dark)] mb-2 flex items-center"><i data-lucide="bus" class="w-5 h-5 mr-2 text-[var(--accent-projects)]"></i> Vehicle Detection, Classification and Counting</h4>
+<p class="text-[var(--color-text-muted)] italic mb-4 text-sm">Tech: Python3, OpenCV, and NumPy</p>
+<ul class="list-disc list-outside space-y-3 pl-5 text-[var(--color-text-dark)] text-sm">
+<li>Implemented <strong>Gaussian Mixture Modeling (GMM)</strong> for precise classification of vehicles into different categories, ensuring accurate data collection.</li>
+<li>Employed <strong>background subtraction techniques</strong> to filter noise from video streams, enhancing the reliability of object detection.</li>
+<li>Integrated <strong>real-time tracking</strong> with object labeling, bounding box, and center extraction to monitor vehicle movement and generate crucial traffic flow statistics.</li>
+</ul>
+</div>
+
+<!-- Project 2: ML Regression for Supermarket Sales Prediction -->
+<div class="interactive-card p-8 shadow-lg border-t-6 border-[var(--accent-projects)] animated-element" style="transition-delay: 0.1s;">
+<h4 class="text-xl font-bold text-[var(--color-text-dark)] mb-2 flex items-center"><i data-lucide="line-chart" class="w-5 h-5 mr-2 text-[var(--accent-projects)]"></i> ML Regression for Supermarket Sales Prediction</h4>
+<p class="text-[var(--color-text-muted)] italic mb-4 text-sm">Tech: Python, Scikit-learn, Pandas (Published at SCRS Conference)</p>
+<ul class="list-disc list-outside space-y-3 pl-5 text-[var(--color-text-dark)] text-sm">
+<li>Conducted a <strong>Performance Comparison of ML Regression Algorithms</strong> (e.g., Linear Regression, Random Forest, SVR) to identify the most accurate model for sales forecasting.</li>
+<li>Analyzed diverse dataset features, including item visibility, store type, and establishment year, resulting in <strong>improved predictive accuracy</strong> for inventory and supply chain management.</li>
+<li>Pre-processed and engineered features to optimize model input, achieving key insights into sales drivers.</li>
+</ul>
+</div>
+</div>
+</section>
+
+<hr class="border-[var(--color-secondary)] my-16" />
+
+<!-- 7. Positions of Responsibility / Leadership Section (New Separate Section) -->
+<section id="leadership" class="py-16">
+<h3 class="section-heading animated-element" style="--section-accent: var(--accent-leadership);">Positions of Responsibility / Leadership</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+<!-- Leadership 1: Chairperson IEEE WIE -->
+<div class="interactive-card p-6 shadow-lg border-l-6 border-[var(--accent-leadership)] animated-element">
+<h4 class="text-xl font-bold text-[var(--color-text-dark)] mb-1 flex items-center"><i data-lucide="users" class="w-5 h-5 mr-2 text-[var(--accent-leadership)]"></i> Chairperson IEEE Women in Engineering</h4>
+<p class="text-[var(--accent-leadership)] font-medium text-sm mb-2">March 2022 - Aug 2023</p>
+<p class="text-[var(--color-text-muted)] text-sm">Oversaw society management and mentorship programs, successfully driving a <strong>20% rise</strong> in female tech event participation and engagement.</p>
+</div>
+
+<!-- Leadership 2: Head of Curation TED VIT Chennai -->
+<div class="interactive-card p-6 shadow-lg border-l-6 border-[var(--accent-leadership)] animated-element" style="transition-delay: 0.1s;">
+<h4 class="text-xl font-bold text-[var(--color-text-dark)] mb-1 flex items-center"><i data-lucide="mic-2" class="w-5 h-5 mr-2 text-[var(--accent-leadership)]"></i> Head of Curation, TEDx VIT Chennai</h4>
+<p class="text-[var(--accent-leadership)] font-medium text-sm mb-2">June 2021 - June 2022</p>
+<p class="text-[var(--color-text-muted)] text-sm">Organized and conducted meetings with speakers and performers, helping them in <strong>finalizing scripts</strong> and ensuring high-quality content for TEDx events.</p>
+</div>
+
+<!-- Leadership 3: Head of Public Relations IEEE CS -->
+<div class="interactive-card p-6 shadow-lg border-l-6 border-[var(--accent-leadership)] animated-element" style="transition-delay: 0.2s;">
+<h4 class="text-xl font-bold text-[var(--color-text-dark)] mb-1 flex items-center"><i data-lucide="megaphone" class="w-5 h-5 mr-2 text-[var(--accent-leadership)]"></i> Head of Public Relations, IEEE Computer Society</h4>
+<p class="text-[var(--accent-leadership)] font-medium text-sm mb-2">July 2021 - June 2022</p>
+<p class="text-[var(--color-text-muted)] text-sm">Responsible for securing sponsorships, marketing initiatives, and managing social media handles to boost club visibility and funding.</p>
+</div>
+
+<!-- Leadership 4: Chief Editor The Capsule Magazine -->
+<div class="interactive-card p-6 shadow-lg border-l-6 border-[var(--accent-leadership)] animated-element" style="transition-delay: 0.3s;">
+<h4 class="text-xl font-bold text-[var(--color-text-dark)] mb-1 flex items-center"><i data-lucide="edit" class="w-5 h-5 mr-2 text-[var(--accent-leadership)]"></i> Chief Editor, The Capsule Magazine</h4>
+<p class="text-[var(--accent-leadership)] font-medium text-sm mb-2">July 2021 - June 2022</p>
+<p class="text-[var(--color-text-muted)] text-sm">Supervised the selection of articles, removal of grammatical errors and plagiarism, and planned publication content for the university newsletter.</p>
+</div>
+</div>
+</section>
+
+<hr class="border-[var(--color-secondary)] my-16" />
+
+<!-- 8. Key Achievements Section (Original section, now only achievements) -->
+<section id="achievements" class="py-16">
+<h3 class="section-heading animated-element" style="--section-accent: var(--accent-achievements);">Key Achievements</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+<!-- Achievement 1: BFDL Documentation Contest Winner -->
+<div class="interactive-card p-6 shadow-lg border-l-6 border-[var(--accent-achievements)] animated-element">
+<h4 class="text-xl font-bold text-[var(--color-text-dark)] mb-1 flex items-center"><i data-lucide="trophy" class="w-5 h-5 mr-2 text-[var(--accent-achievements)]"></i> BFDL Documentation Contest Winner</h4>
+<p class="text-[var(--accent-achievements)] font-medium text-sm mb-2">Bajaj Finserv Direct Limited | Aug 2023</p>
+<p class="text-[var(--color-text-muted)] text-sm">Awarded for comprehensive Pocket Insurance journey documentation using <strong>Structurizr DSL</strong>, recognized for clarity, scalability, and impact on team onboarding and maintenance.</p>
+</div>
+
+<!-- Achievement 2: Walmart CodeHers 2022 -->
+<div class="interactive-card p-6 shadow-lg border-l-6 border-[var(--accent-achievements)] animated-element" style="transition-delay: 0.1s;">
+<h4 class="text-xl font-bold text-[var(--color-text-dark)] mb-1 flex items-center"><i data-lucide="award" class="w-5 h-5 mr-2 text-[var(--accent-achievements)]"></i> Walmart CodeHers 2022</h4>
+<p class="text-[var(--accent-achievements)] font-medium text-sm mb-2">National Coding Challenge | March 2022</p>
+<p class="text-[var(--color-text-muted)] text-sm">Shortlisted in the first list of top performers among over <strong>42,000+ candidates</strong>, demonstrating top-tier competitive programming skills.</p>
+</div>
+</div>
+</section>
+</div>
+
+<!-- === CONTACT VIEW (Hidden by default) === -->
+<div id="contact-view" class="content-view flex flex-col items-center py-24 min-h-[60vh]">
+<div class="animated-element w-full max-w-2xl interactive-card p-10 text-center shadow-2xl">
+<i data-lucide="mail" class="w-12 h-12 text-[var(--color-primary)] mx-auto mb-4"></i>
+<h3 class="text-4xl font-heading text-[var(--color-text-dark)] mb-4">Get In Touch</h3>
+<p class="text-lg text-[var(--color-text-muted)] mb-8">I'm currently based in Dublin and always open to discussing new opportunities in software engineering, system design, and large-scale applications.</p>
+
+<a href="mailto:gunja.pandey@ucdconnect.ie" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-lg text-white bg-[var(--color-primary)] hover:bg-[var(--nav-bg)] transition duration-300 transform hover:scale-105">
+<i data-lucide="send" class="w-5 h-5 mr-2"></i> Email Me Directly
+</a>
+<p class="text-sm text-[var(--color-text-muted)] mt-6">or connect via LinkedIn for professional updates.</p>
+<div class="flex justify-center space-x-6 mt-4">
+<a href="https://linkedin/in/gunjapandey/" target="_blank" class="text-[var(--color-primary)] hover:text-[var(--nav-bg)] transition duration-200">
+<i data-lucide="linkedin" class="w-8 h-8"></i>
+</a>
+<a href="https://github.com/gunjapandey" target="_blank" class="text-[var(--color-primary)] hover:text-[var(--nav-bg)] transition duration-200">
+<i data-lucide="github" class="w-8 h-8"></i>
+</a>
+</div>
+</div>
+</div>
+</main>
+
+<!-- 9. Footer -->
+<footer class="bg-[var(--color-card)] border-t border-[var(--color-secondary)] mt-12">
+<div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center text-sm text-[var(--color-text-muted)]">
+<p>&copy; 2025 Gunja Pandey. All rights reserved.</p>
+<p>Designed with <span class="text-red-500">&hearts;</span> & Tailwind CSS</p>
+</div>
+</div>
+</footer>
+
+<script>
+// --- Core Application State ---
+let currentView = 'portfolio';
+
+// --- Utility Functions ---
+
+/**
+        * Toggles between the 'portfolio' and 'contact' views.
+        * @param {string} viewName - 'portfolio' or 'contact'
+        */
+function toggleView(viewName) {
+const portfolioView = document.getElementById('portfolio-view');
+const contactView = document.getElementById('contact-view');
+const contactBtn = document.getElementById('contact-nav-btn');
+
+if (viewName === 'contact') {
+portfolioView.classList.remove('active');
+contactView.classList.add('active');
+contactBtn.textContent = 'View Portfolio';
+contactBtn.onclick = () => toggleView('portfolio');
+currentView = 'contact';
+} else {
+contactView.classList.remove('active');
+portfolioView.classList.add('active');
+contactBtn.textContent = 'Contact Me';
+contactBtn.onclick = () => toggleView('contact');
+currentView = 'portfolio';
+}
+// Scroll to top when view changes
+window.scrollTo({ top: 0, behavior: 'smooth' });
+updateActiveNavLink();
+}
+
+/**
+        * Handles the Dark Mode toggle logic.
+        */
+function initializeThemeToggle() {
+const toggleButton = document.getElementById('theme-toggle');
+const sunIcon = document.getElementById('sun-icon');
+const moonIcon = document.getElementById('moon-icon');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+// Initial state based on OS preference or localStorage
+let isDarkMode = localStorage.getItem('theme') === 'dark' || (localStorage.getItem('theme') === null && prefersDark);
+
+if (isDarkMode) {
+document.body.classList.add('dark-mode');
+sunIcon.classList.add('hidden');
+moonIcon.classList.remove('hidden');
+}
+
+toggleButton.addEventListener('click', () => {
+document.body.classList.toggle('dark-mode');
+isDarkMode = document.body.classList.contains('dark-mode');
+localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+
+sunIcon.classList.toggle('hidden', isDarkMode);
+moonIcon.classList.toggle('hidden', !isDarkMode);
+});
+}
+
+/**
+        * Updates the scroll progress bar based on the scroll position.
+        */
+function updateScrollProgress() {
+const progress = document.getElementById('scroll-progress');
+const scrollTotal = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+if (scrollTotal > 0) {
+const scrolled = document.documentElement.scrollTop;
+const progressWidth = (scrolled / scrollTotal) * 100;
+progress.style.width = `${progressWidth}%`;
+}
+}
+
+/**
+        * Updates the active class on navigation links based on visible section.
+        */
+function updateActiveNavLink() {
+if (currentView !== 'portfolio') return;
+
+// Note: Since we are adding Leadership before Achievements, we need to check both.
+const sections = document.querySelectorAll('section[id]:not(#leadership):not(#achievements)');
+const navLinks = document.querySelectorAll('#portfolio-nav a');
+let activeSectionId = 'about';
+
+const scrollPos = window.scrollY + window.innerHeight / 2; // Midpoint of viewport
+
+// Special handling for the Leadership/Achievements block
+const leadershipSection = document.getElementById('leadership');
+const achievementSection = document.getElementById('achievements');
+
+if (leadershipSection && achievementSection) {
+const combinedTop = leadershipSection.offsetTop;
+const combinedBottom = achievementSection.offsetTop + achievementSection.offsetHeight;
+
+// If the scroll position is within the combined Leadership/Achievements block, keep the last major link active (Projects)
+if (scrollPos > combinedTop && scrollPos < combinedBottom) {
+activeSectionId = 'projects'; // Keep Projects highlighted if within the Leadership/Achievements block below it
+}
+}
+
+
+sections.forEach(section => {
+if (section.offsetTop <= scrollPos && section.offsetTop + section.offsetHeight > scrollPos) {
+activeSectionId = section.id;
+}
+});
+
+navLinks.forEach(link => {
+link.classList.remove('active');
+// The main nav links target main sections, so we adjust the logic for the last part
+if (link.getAttribute('data-target') === activeSectionId) {
+link.classList.add('active');
+}
+});
+}
+
+/**
+        * Handles the scroll reveal animation for elements.
+        */
+function handleScrollReveal() {
+const elements = document.querySelectorAll('.animated-element:not(.reveal)');
+const triggerBottom = window.innerHeight * 0.9;
+
+elements.forEach(el => {
+const elementTop = el.getBoundingClientRect().top;
+if (elementTop < triggerBottom) {
+el.classList.add('reveal');
+}
+});
+}
+
+// --- Initialization on Load ---
+window.onload = function() {
+// Initialize Lucide Icons
+lucide.createIcons();
+
+// Initialize Theme Toggle
+initializeThemeToggle();
+
+// Bind scroll events
+window.addEventListener('scroll', updateScrollProgress);
+window.addEventListener('scroll', updateActiveNavLink);
+window.addEventListener('scroll', handleScrollReveal);
+
+// Initial calls
+updateScrollProgress();
+updateActiveNavLink();
+handleScrollReveal();
+
+// Force the initial view to show the portfolio content
+document.getElementById('portfolio-view').classList.add('active');
+
+// Set initial active link (for the 'about' section)
+document.querySelector('#portfolio-nav a[data-target="about"]').classList.add('active');
+};
+</script>
 </body>
 </html>
